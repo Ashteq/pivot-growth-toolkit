@@ -25,9 +25,10 @@ export default function MetaMorphosisPage() {
     try {
       const auditData = await analyzeMetadataAction(inputValue, inputType);
       setResult(auditData);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Failed to analyze data.";
       console.error(error);
-      alert(error.message || "Failed to analyze data.");
+      alert(errorMessage);
     } finally {
       setIsLoading(false);
     }
